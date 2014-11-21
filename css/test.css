@@ -1,0 +1,103 @@
+@import url(reset.css);
+
+body {
+	font-family: Arial;
+}
+
+#tasty_box {
+	width: 323px;
+	height: 330px;
+	padding: 5px 0;
+	background: url("../img/comp_plate_graybasic.png") no-repeat;
+}
+
+.width {
+	width: 315px;
+	margin: 0 auto;
+}
+
+#buttons {
+	padding: 15px 0 0 0;
+}
+
+#title {
+	font-size: 18px;
+	color: #F58220;
+	font-weight: bold;
+	text-overflow: ellipsis;
+}
+
+#text_cont {
+	margin: 0 5px;
+}
+
+#main_text {
+	padding: 3px 0 0 0;
+	height: 35px;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+#buttons>li {
+	float: left;
+	padding-right: 8px;
+}
+
+#buttons>li:nth-last-child(1) {
+	float: right;
+}
+
+.bt {
+	width: 72px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #A1A1A1;
+	text-decoration: none;
+}
+
+#details {
+	color: grey;
+}
+
+#show {
+	color: #F58220;
+	padding: 0 0 0 5px;
+	position: relative;
+	top: 3px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#prev {
+	background: url("../img/button_bg_white_left2.png") no-repeat;
+	padding: 5px 15px 13px 30px;
+}
+
+#next {
+	background: url("../img/button_bg_white_right2.png") no-repeat;
+	padding: 5px 30px 8px 13px;
+}
+
+#find {
+	background: url("../img/button_bg_white_right3.png") no-repeat;
+	padding: 5px 30px 8px 16px;
+	color: #F58220;
+}
+
+#prev:hover {
+	background: url("../img/button_bg_orange_left2.png") no-repeat;
+	color: white;
+}
+
+#next:hover  {
+	background: url("../img/button_bg_orange_right2.png") no-repeat;
+	color: white;
+}
+
+#find:hover  {
+	background: url("../img/button_bg_orange_right3.png") no-repeat;
+	color: white;
+}
