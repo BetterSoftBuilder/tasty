@@ -27,6 +27,11 @@ body {
 	text-overflow: ellipsis;
 }
 
+#img_cont {
+        width: 312px;
+        height: 200px;
+}
+
 #text_cont {
 	margin: 0 5px;
 }
