@@ -32,6 +32,12 @@ body {
         height: 200px;
 }
 
+#imgLoad {
+    position:absolute; 
+    z-index:1000; 
+    display:none;
+}
+
 #text_cont {
 	margin: 0 5px;
 }
