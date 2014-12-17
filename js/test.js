@@ -36,7 +36,7 @@ var Tasty = (function () {
     }
 
     function _loadAnimation(container) {
-        container.image("img/load.gif",function(){
+        container.image("img/loader.gif",function(){
             var imgLoad = $("#imgLoad");
             imgLoad.show();
             var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
