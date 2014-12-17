@@ -3,7 +3,18 @@ var Tasty = (function () {
     var i = 0;
     var tastyBase = false;
 
+    $.fn.image = function(src, f) {
+        return this.each(function() {
+          var i = new Image();
+          i.src = src;
+          i.onload = f;
+          i.id = 'imgLoad';
+          this.appendChild(i);
+        });
+    };
+
     function _getData() {
+        _loadAnimation($("#img_cont"));
         if (!tastyBase) {
             $.when($.getJSON('../json/info_box.json')).then(
                     function (json) {
@@ -24,18 +35,21 @@ var Tasty = (function () {
         }
     }
 
-    function _loadAnimation(img) {
-        var imgLoad = img;
-        var imgWrap = imgLoad.parent();
-        imgLoad.show();
-        var centerY = imgWrap.scrollTop() + (imgWrap.height() - imgLoad.height()) / 2;
-        var centerX = imgWrap.scrollLeft() + (imgWrap.width() - imgLoad.width()) / 2;
-        imgLoad.offset({top: centerY, left: centerX});
+    function _loadAnimation(container) {
+        container.image("img/load.gif",function(){
+            var imgLoad = $("#imgLoad");
+            imgLoad.show();
+            var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
+            var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
+            imgLoad.offset({top: centerY, left: centerX});
+        });
     }
 
     function _loadContent() {
+        _loadAnimation($("#img_cont"));
         $('#main_img').fadeOut(250, function () {
             $(this).attr('src', 'img/' + tastyBase[i].img).fadeIn(500);
+            $("#imgLoad").hide();
         });
         $('#title').html(tastyBase[i].title);
         $('#text').html(tastyBase[i].description);
@@ -69,6 +83,7 @@ var Tasty = (function () {
             if (i < 0) i = tastyBase.length - 1;
         }
         _loadContent();
+        //_loadAnimation($("#img_cont"));
     }
 
     function _showDetails(h) {
@@ -89,7 +104,6 @@ var Tasty = (function () {
         init: function (cover) {
             _coverInit(cover);
             _getData();
-            _loadAnimation($("#imgLoad"));
             _events();
         }
     };
