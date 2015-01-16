@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html lang="en-US">
+<html ng-app="tasty">
 <head>
 	<meta charset="UTF-8">
 	<title>test</title>
@@ -7,30 +7,15 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/test.js"></script>
-	<script>
-	$(function(){	
-	    Tasty.init(
-        	{
-                    tasty_boxUrl: '../img/comp_plate_graybasic.png',
-                    prevUrl     : '../img/button_bg_white_left2.png',
-                    nextUrl     : '../img/button_bg_white_right2.png',
-                    findUrl     : '../img/button_bg_white_right3.png',
-                    prevHovUrl  : '../img/button_bg_orange_left2.png',
-                    nextHovUrl  : '../img/button_bg_orange_right2.png',
-                    findHovUrl  : '../img/button_bg_orange_right3.png'
-        	}
-            );
-		
-	});
-	</script>
 </head>
 <body>
-	<div id="tasty_box">
+	<div ng-controller="TastyBox" ng-init="init()" id="tasty_box">
 		<div class="width">
 			<div id="img_cont">                                
-				<img id="main_img" src="" alt="">
+				<img id="main_img">
 			</div>
 			<div id="text_cont">	
 				<h1 id="title"></h1>

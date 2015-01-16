@@ -1,110 +1,121 @@
-var Tasty = (function () {
+angular.module('tasty', [])
+    .controller('TastyBox', function ($scope) {
 
-    var i = 0;
-    var tastyBase = false;
-
-    $.fn.image = function(src, f) {
-        return this.each(function() {
-          var i = new Image();
-          i.src = src;
-          i.onload = f;
-          i.id = 'imgLoad';
-          this.appendChild(i);
-        });
-    };
-
-    function _getData() {
-        _loadAnimation($("#img_cont"));
-        if (!tastyBase) {
-            $.when($.getJSON('../json/info_box.json')).then(
-                    function (json) {
-                        tastyBase = json;
-                        $("#imgLoad").hide();
-                        _loadContent();
-                    }, function () {
-                //TODO
+        $.fn.image = function(src, f) {
+            return this.each(function() {
+              var i = new Image();
+              i.src = src;
+              i.onload = f;
+              i.id = 'imgLoad';
+              this.appendChild(i);
             });
-        } else {
-            return tastyBase;
-        }
-    }
+        };
 
-    function _coverInit(cover) {
-        for (var backUrl in cover) {
-            cover[backUrl] && $('#' + backUrl.toString().substr(backUrl.toString().length - 3, 3)).css({'background': "url(" + cover[backUrl] + ") no-repeat"});
-        }
-    }
+        $scope.tastyBase = false;
 
-    function _loadAnimation(container) {
-        container.image("img/loader.gif",function(){
-            var imgLoad = $("#imgLoad");
-            imgLoad.show();
-            var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
-            var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
-            imgLoad.offset({top: centerY, left: centerX});
-        });
-    }
+        $scope.i = 0;
 
-    function _loadContent() {
-        _loadAnimation($("#img_cont"));
-        $('#main_img').fadeOut(250, function () {
-            $(this).attr('src', 'img/' + tastyBase[i].img).fadeIn(500);
-            $("#imgLoad").hide();
-        });
-        $('#title').html(tastyBase[i].title);
-        $('#text').html(tastyBase[i].description);
-        $('#details').html(tastyBase[i].note);
-        $('#find').attr('href', tastyBase[i].productUrl);
-    }
+        $scope.cover = {
+                            tasty_boxUrl: '../img/comp_plate_graybasic.png',
+                            prevUrl     : '../img/button_bg_white_left2.png',
+                            nextUrl     : '../img/button_bg_white_right2.png',
+                            findUrl     : '../img/button_bg_white_right3.png',
+                            prevHovUrl  : '../img/button_bg_orange_left2.png',
+                            nextHovUrl  : '../img/button_bg_orange_right2.png',
+                            findHovUrl  : '../img/button_bg_orange_right3.png'
+                        };
 
-    function _events() {
-        var h = parseInt($("#main_text").css("height"));
-        var tasty_box = $("#tasty_box");
-        tasty_box.on("click", "#prev", function (e) {
-            e.preventDefault();
-            _navigation(0);
-        });
-        tasty_box.on("click", "#next", function (e) {
-            e.preventDefault();
-            _navigation(1);
-        });
-        tasty_box.on("click", "#show", function (e) {
-            e.preventDefault();
-            _showDetails(h);
-        });
-    }
+        $scope._getData = function() {
+            $scope._loadAnimation($("#img_cont"));
+            if (!$scope.tastyBase) {
+                $.when($.getJSON('../json/info_box.json')).then(
+                        function (json) {
+                            $scope.tastyBase = json;
+                            $("#imgLoad").hide();
+                            $scope._loadContent();
+                        }, function () {
+                    //TODO
+                });
+            } else {
+                return $scope.tastyBase;
+            }
+        };
 
-    function _navigation(nav) {
-        if (nav) {
-            i++;
-            if (i >= tastyBase.length) i = 0;
-        } else {
-            i--;
-            if (i < 0) i = tastyBase.length - 1;
-        }
-        _loadContent();
-        //_loadAnimation($("#img_cont"));
-    }
+        $scope._coverInit = function() {
+            for (var backUrl in $scope.cover) {
+                $scope.cover[backUrl] && $('#' + backUrl.toString().substr(backUrl.toString().length - 3, 3)).css({'background': "url(" + $scope.cover[backUrl] + ") no-repeat"});
+            }
+        };
 
-    function _showDetails(h) {
-        var text = $("#main_text");
-        var text_height = $("#main_text").css("height");
-        if (text_height == h + 'px' || text_height == h + 200 + 'px') {
-            $("#img_cont").stop().animate({opacity: "toggle", height: 'toggle'}, 500);
-        }
-        if (text_height == h + 'px') {
-            text.stop().animate({height: '+=200px'}, 500);
-        }
-        if (text_height == h + 200 + 'px') {
-            text.stop().animate({height: h}, 500);
-        }
-    }
+        $scope._loadAnimation = function(container) {
+            container.image("img/loader.gif",function(){
+                var imgLoad = $("#imgLoad");
+                imgLoad.show();
+                var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
+                var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
+                imgLoad.offset({top: centerY, left: centerX});
+            });
+        };
 
-    return {
-        init: function (cover) {
-            _coverInit(cover);
-            _getData();
-            _events();
-        }
-    };
-}());
+        $scope._loadContent = function() {
+            $scope._loadAnimation($("#img_cont"));
+            $('#main_img').fadeOut(250, function () {
+                $(this).attr('src', 'img/' + $scope.tastyBase[$scope.i].img).fadeIn(500);
+                $("#imgLoad").hide();
+            });
+            $('#title').html($scope.tastyBase[$scope.i].title);
+            $('#text').html($scope.tastyBase[$scope.i].description);
+            $('#details').html($scope.tastyBase[$scope.i].note);
+            $('#find').attr('href', $scope.tastyBase[$scope.i].productUrl);
+        };
+
+        $scope._events = function() {
+            var h = parseInt($("#main_text").css("height"));
+            var tasty_box = $("#tasty_box");
+            tasty_box.on("click", "#prev", function (e) {
+                e.preventDefault();
+                $scope._navigation(0);
+            });
+            tasty_box.on("click", "#next", function (e) {
+                e.preventDefault();
+                $scope._navigation(1);
+            });
+            tasty_box.on("click", "#show", function (e) {
+                e.preventDefault();
+                $scope._showDetails(h);
+            });
+        };
+
+        $scope._navigation = function(nav) {
+            if (nav) {
+                $scope.i++;
+                if ($scope.i >= $scope.tastyBase.length) $scope.i = 0;
+            } else {
+                $scope.i--;
+                if ($scope.i < 0) $scope.i = $scope.tastyBase.length - 1;
+            }
+            $scope._loadContent();
+            //_loadAnimation($("#img_cont"));
+        };
+
+        $scope._showDetails = function(h) {
+            var text = $("#main_text");
+            var text_height = $("#main_text").css("height");
+            if (text_height == h + 'px' || text_height == h + 200 + 'px') {
+                $("#img_cont").stop().animate({opacity: "toggle", height: 'toggle'}, 500);
+            }
+            if (text_height == h + 'px') {
+                text.stop().animate({height: '+=200px'}, 500);
+            }
+            if (text_height == h + 200 + 'px') {
+                text.stop().animate({height: h}, 500);
+            }
+        };
+
+        $scope.init = function() {
+            $scope._coverInit();
+            $scope._getData();
+            $scope._events();
+        };
+
+    });
