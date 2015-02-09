@@ -1,31 +1,41 @@
 ﻿<!DOCTYPE HTML>
-<html ng-app="tasty">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<title>test</title>
 	<link href="css/test.css" rel="stylesheet">
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
-	<script src="js/jquery-2.1.1.min.js"></script>
+        <!-- Angulars Material CSS using RawGit to load directly from `bower-material/master` -->
+        <link rel="stylesheet" href="//rawgit.com/angular/bower-material/master/angular-material.css">
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <!-- Angular Material Dependencies -->
+        <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-animate.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-aria.min.js"></script>
+        <!-- Angular Material Javascript now available via Google CDN; version 0.6 used here -->
+        <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.6.1/angular-material.min.js"></script>
 	<script src="js/test.js"></script>
 </head>
-<body>
+<body ng-app="tasty">
 	<div ng-controller="TastyBox" ng-init="init()" id="tasty_box">
 		<div class="width">
 			<div id="img_cont">                                
-				<img id="main_img">
+				<img ng-animate="'animate'" class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='currentIndex($index)' alt=''>
+                                <!-- <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>-->
 			</div>
 			<div id="text_cont">	
-				<h1 id="title"></h1>
-				<p id="main_text"><span id="text"></span><br><br><span id="details"></span></p>
+				<h1 class="title" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.title}}</h1>
+				<p class="main_text">
+                                    <span class="text" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.description}}</span><br><br>
+                                    <span class="details" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.note}}</span>
+                                </p>
 			</div>
 			<a href="" id="show">show details</a>
 			<ul id="buttons">
 				<li><a href="" id="prev" class="bt">Prev</a></li>
 				<li><a href="" id="next" class="bt">Next</a></li>
-				<li><a href="" id="find" class="bt">Find</a></li>
+				<li><a ng-repeat='slide in tastyBase' ng-href="{{slide.productUrl}}" ng-if='currentIndex($index)' id="find" class="bt">Find</a></li>
 			</ul>
 		</div>
 	</div>
