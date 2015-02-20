@@ -13,7 +13,14 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
 
         $scope.tastyBase = false;
 
+        $scope.h = parseInt($("#text_cont>p").css("height"));
+
         $scope.index = 0;
+
+        $scope.$watch('index',function (newIndex) {
+            if (newIndex >= $scope.tastyBase.length) $scope.index = 0;
+            if (newIndex < 0) $scope.index = $scope.tastyBase.length - 1;
+        });
 
         $scope.cover = {
                             tasty_boxUrl: '../img/comp_plate_graybasic.png',
@@ -51,56 +58,23 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
             imgLoad.offset({top: centerY, left: centerX});
         };
 
-        $scope.events = function() {
-            var h = parseInt($("#text_cont>p").css("height"));
-            var tasty_box = $("#tasty_box");
-            tasty_box.on("click", "#prev", function (e) {
-                e.preventDefault();
-                $scope.navigation(0);
-            });
-            tasty_box.on("click", "#next", function (e) {
-                e.preventDefault();
-                $scope.navigation(1);
-            });
-            tasty_box.on("click", "#show", function (e) {
-                e.preventDefault();
-                $scope.showDetails(h);
-            });
-        };
-
-        $scope.navigation = function(nav) {
-            if (nav) {
-                $scope.index++;
-                if ($scope.index >= $scope.tastyBase.length) $scope.index = 0;
-            } else {
-                $scope.index--;
-                if ($scope.index < 0) $scope.index = $scope.tastyBase.length - 1;
-            }
-            //$scope._loadContent();
-        };
-
         $scope.showDetails = function(h) {
             var text = $(".main_text");
             var text_height = $(".main_text").css("height");
-            if (text_height == h + 'px' || text_height == h + 200 + 'px') {
+            if (text_height == $scope.h + 'px' || text_height == $scope.h + 200 + 'px') {
                 $("#img_cont").stop().animate({opacity: "toggle", height: 'toggle'}, 500);
             }
-            if (text_height == h + 'px') {
+            if (text_height == $scope.h + 'px') {
                 text.stop().animate({height: '+=200px'}, 500);
             }
-            if (text_height == h + 200 + 'px') {
-                text.stop().animate({height: h}, 500);
+            if (text_height == $scope.h + 200 + 'px') {
+                text.stop().animate({height: $scope.h}, 500);
             }
-        };
-
-        $scope.currentIndex = function(i) {
-            return $scope.index == i;
         };
 
         $scope.init = function() {
             $scope.coverInit();
             $scope.getData();
-            $scope.events();
         };
 
-    }]);
+}]);

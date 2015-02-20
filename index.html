@@ -22,23 +22,23 @@
 		<div class="width">
                     <div id="load_cont">
                         <div id="img_cont">                                
-				<img ng-animate="'animate'" class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='currentIndex($index)' alt=''>
+				<img ng-animate="'animate'" class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='index==$index' alt=''>
                                 <!-- <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>-->
 			</div>
 			<div id="text_cont">	
-				<h1 class="title" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.title}}</h1>
+				<h1 class="title" ng-repeat='slide in tastyBase' ng-if='index==$index'>{{slide.title}}</h1>
 				<p class="main_text">
-                                    <span class="text" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.description}}</span><br><br>
-                                    <span class="details" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.note}}</span>
+                                    <span class="text" ng-repeat='slide in tastyBase' ng-if='index==$index'>{{slide.description}}</span><br><br>
+                                    <span class="details" ng-repeat='slide in tastyBase' ng-if='index==$index'>{{slide.note}}</span>
                                 </p>
 			</div>
                     </div>
                     <div id="nav_cont">
-                        <div id="show">show details</div>
+                        <div ng-click="showDetails()" id="show">show details</div>
 			<ul id="buttons">
-				<li><a href="" id="prev" class="bt">Prev</a></li>
-				<li><a href="" id="next" class="bt">Next</a></li>
-				<li><a ng-repeat='slide in tastyBase' ng-href="{{slide.productUrl}}" ng-if='currentIndex($index)' id="find" class="bt">Find</a></li>
+				<li><a ng-click="index=index-1" href="" id="prev" class="bt">Prev</a></li>
+				<li><a ng-click="index=index+1" href="" id="next" class="bt">Next</a></li>
+                                <li><a ng-repeat='slide in tastyBase' ng-href="{{slide.productUrl}}" ng-if='index==$index' id="find" class="bt">Find</a></li>
 			</ul>
                     </div>			
 		</div>
