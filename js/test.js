@@ -1,4 +1,4 @@
-var tastyApp = angular.module('tasty', ['ngMaterial','ngAnimate']);
+var tastyApp = angular.module('tastyApp', ['ngMaterial','ngAnimate']);
 
 tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
 
@@ -52,23 +52,23 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
         };
 
         $scope.events = function() {
-            var h = parseInt($("#main_text").css("height"));
+            var h = parseInt($("#text_cont>p").css("height"));
             var tasty_box = $("#tasty_box");
             tasty_box.on("click", "#prev", function (e) {
                 e.preventDefault();
-                $scope._navigation(0);
+                $scope.navigation(0);
             });
             tasty_box.on("click", "#next", function (e) {
                 e.preventDefault();
-                $scope._navigation(1);
+                $scope.navigation(1);
             });
             tasty_box.on("click", "#show", function (e) {
                 e.preventDefault();
-                $scope._showDetails(h);
+                $scope.showDetails(h);
             });
         };
 
-        $scope._navigation = function(nav) {
+        $scope.navigation = function(nav) {
             if (nav) {
                 $scope.index++;
                 if ($scope.index >= $scope.tastyBase.length) $scope.index = 0;
@@ -79,7 +79,7 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
             //$scope._loadContent();
         };
 
-        $scope._showDetails = function(h) {
+        $scope.showDetails = function(h) {
             var text = $(".main_text");
             var text_height = $(".main_text").css("height");
             if (text_height == h + 'px' || text_height == h + 200 + 'px') {

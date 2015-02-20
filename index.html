@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html>
+<html ng-app="tastyApp">
 <head>
 	<meta charset="UTF-8">
 	<title>test</title>
@@ -17,10 +17,11 @@
         <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.6.1/angular-material.min.js"></script>
 	<script src="js/test.js"></script>
 </head>
-<body ng-app="tasty">
+<body>
 	<div ng-controller="TastyBox" ng-init="init()" id="tasty_box">
 		<div class="width">
-			<div id="img_cont">                                
+                    <div id="load_cont">
+                        <div id="img_cont">                                
 				<img ng-animate="'animate'" class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='currentIndex($index)' alt=''>
                                 <!-- <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>-->
 			</div>
@@ -31,12 +32,15 @@
                                     <span class="details" ng-repeat='slide in tastyBase' ng-if='currentIndex($index)'>{{slide.note}}</span>
                                 </p>
 			</div>
-			<a href="" id="show">show details</a>
+                    </div>
+                    <div id="nav_cont">
+                        <div id="show">show details</div>
 			<ul id="buttons">
 				<li><a href="" id="prev" class="bt">Prev</a></li>
 				<li><a href="" id="next" class="bt">Next</a></li>
 				<li><a ng-repeat='slide in tastyBase' ng-href="{{slide.productUrl}}" ng-if='currentIndex($index)' id="find" class="bt">Find</a></li>
 			</ul>
+                    </div>			
 		</div>
 	</div>
 </body>

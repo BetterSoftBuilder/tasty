@@ -6,7 +6,7 @@ body {
 
 #tasty_box {
 	width: 323px;
-	height: 330px;
+	height: 335px;
 	padding: 5px 0;
 	background: url("../img/comp_plate_graybasic.png") no-repeat;
 }
@@ -25,6 +25,7 @@ body {
 	color: #F58220;
 	font-weight: bold;
 	text-overflow: ellipsis;
+        margin: 0;
 }
 
 #img_cont {
@@ -39,7 +40,7 @@ body {
 }
 
 #text_cont {
-	margin: 0 5px;
+	margin: 5px;
 }
 
 .main_text {
@@ -80,6 +81,8 @@ body {
 	top: 3px;
 	font-size: 12px;
 	font-weight: bold;
+        text-decoration: underline;
+        cursor: pointer;
 }
 
 #prev {
