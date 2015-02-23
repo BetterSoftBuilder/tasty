@@ -13,7 +13,7 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
 
         $scope.tastyBase = false;
 
-        $scope.h = parseInt($("#text_cont>p").css("height"));
+        $scope.h = parseInt($(".main_text").css("height"));
 
         $scope.index = 0;
 
@@ -58,7 +58,7 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
             imgLoad.offset({top: centerY, left: centerX});
         };
 
-        $scope.showDetails = function(h) {
+        $scope.showDetails = function() {
             var text = $(".main_text");
             var text_height = $(".main_text").css("height");
             if (text_height == $scope.h + 'px' || text_height == $scope.h + 200 + 'px') {
