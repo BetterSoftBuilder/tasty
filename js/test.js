@@ -35,7 +35,7 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
         $scope.getData = function() {
             //$scope._loadAnimation($("#img_cont"));
             if (!$scope.tastyBase) {
-                $http.post('../json/info_box.json').success(
+                $http.get('json/info_box.json').success(
                     function (json) {
                         $scope.tastyBase = json;
                     }).error(function () {
