@@ -13,9 +13,14 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
 
         $scope.tastyBase = false;
 
-        $scope.h = parseInt($(".main_text").css("height"));
-
+        $scope.imgHeight = parseInt($("#img_cont").css("height"));
+        $scope.textHeight = parseInt($(".main_text").css("height")) + $scope.imgHeight;
+        $scope.textDisplay = false;
         $scope.index = 0;
+
+        $scope.$watch('textDisplay', function (flag) {
+            $scope.textHeight = flag ? ($scope.textHeight += $scope.imgHeight) : ($scope.textHeight -= $scope.imgHeight);
+        });
 
         $scope.$watch('index',function (newIndex) {
             if (newIndex >= $scope.tastyBase.length) $scope.index = 0;
@@ -56,20 +61,6 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
             var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
             var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
             imgLoad.offset({top: centerY, left: centerX});
-        };
-
-        $scope.showDetails = function() {
-            var text = $(".main_text");
-            var text_height = $(".main_text").css("height");
-            if (text_height == $scope.h + 'px' || text_height == $scope.h + 200 + 'px') {
-                $("#img_cont").stop().animate({opacity: "toggle", height: 'toggle'}, 500);
-            }
-            if (text_height == $scope.h + 'px') {
-                text.stop().animate({height: '+=200px'}, 500);
-            }
-            if (text_height == $scope.h + 200 + 'px') {
-                text.stop().animate({height: $scope.h}, 500);
-            }
         };
 
         $scope.init = function() {

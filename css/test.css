@@ -55,6 +55,7 @@ body {
 #buttons>li {
 	float: left;
 	padding-right: 8px;
+        margin-top: 0;
 }
 
 #buttons>li:nth-last-child(1) {
