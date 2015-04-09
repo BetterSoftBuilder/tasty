@@ -14,6 +14,8 @@ body {
 .width {
 	width: 315px;
 	margin: 0 auto;
+        position: relative;
+        height: 100%;
 }
 
 #buttons {
@@ -31,6 +33,8 @@ body {
 #img_cont {
         width: 312px;
         height: 200px;
+        -webkit-transition: all ease-in-out 0.6s;
+        transition: all ease-in-out 0.6s;
 }
 
 #imgLoad {
@@ -49,6 +53,8 @@ body {
 	font-size: 12px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+        -webkit-transition: all ease-in 0.5s;
+        transition: all ease-in 0.5s;
 }
 
 
@@ -118,10 +124,8 @@ body {
 }
 
  .slide.ng-enter, .slide.ng-leave {    
-     -webkit-transition: opacity 0.8s ease-in-out;
-     -moz-transition: opacity 0.8s ease-in-out;
-     -ms-transition: opacity 0.8s ease-in-out;
-     transition: opacity 0.8s ease-in-out;  
+     -webkit-transition: all 0.8s ease-in-out;
+     transition: all 0.8s ease-in-out;  
  }
  .slide.ng-enter,
  .slide.ng-leave.ng-leave-active {
@@ -137,4 +141,20 @@ body {
  
  .slide {
      position: absolute;
+ }
+ 
+ #img_cont.ng-hide {
+     z-index: 0;    
+     opacity: 0;
+     height:0;
+ }
+ 
+ #load_cont {
+     position: relative;
+     height: 80%;
+ }
+ 
+ #nav_cont {
+     position: relative;
+     height: 15%;
  }

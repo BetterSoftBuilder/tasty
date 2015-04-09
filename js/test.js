@@ -1,6 +1,6 @@
 var tastyApp = angular.module('tastyApp', ['ngMaterial','ngAnimate']);
 
-tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
+tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', '$animate', function($scope, $interval, $http, $animate) {
 
         $scope.mode = 'query';
         $scope.determinateValue = 30;
@@ -19,7 +19,9 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', function($scope
         $scope.index = 0;
 
         $scope.$watch('textDisplay', function (flag) {
-            $scope.textHeight = flag ? ($scope.textHeight += $scope.imgHeight) : ($scope.textHeight -= $scope.imgHeight);
+            //$scope.textHeight = flag ? ($scope.textHeight += $scope.imgHeight) : ($scope.textHeight -= $scope.imgHeight);
+            flag ? $animate.animate($(".main_text"), {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight += $scope.imgHeight)+'px'}) :
+                   $animate.animate($(".main_text"), {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight -= $scope.imgHeight)+'px'});
         });
 
         $scope.$watch('index',function (newIndex) {

@@ -21,8 +21,8 @@
 	<div ng-controller="TastyBox" ng-init="init()" id="tasty_box">
 		<div class="width">
                     <div id="load_cont">
-                        <div id="img_cont" ng-show="!textDisplay">                                
-				<img ng-animate="'animate'" class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='index==$index' alt=''>
+                        <div id="img_cont" ng-hide="textDisplay">                                
+				<img class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='index==$index' alt=''>
                                 <!-- <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>-->
 			</div>
 			<div id="text_cont">	
