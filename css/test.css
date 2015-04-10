@@ -12,10 +12,10 @@ body {
 }
 
 .width {
-	width: 315px;
-	margin: 0 auto;
-        position: relative;
-        height: 100%;
+	width: 98%;
+	margin: 0 auto;        
+	position: relative;        
+	height: 100%;
 }
 
 #buttons {
@@ -33,7 +33,6 @@ body {
 #img_cont {
         width: 312px;
         height: 200px;
-        -webkit-transition: all ease-in-out 0.6s;
         transition: all ease-in-out 0.6s;
 }
 
@@ -44,7 +43,7 @@ body {
 }
 
 #text_cont {
-	margin: 5px;
+	margin: 0 5px;
 }
 
 .main_text {
@@ -53,7 +52,6 @@ body {
 	font-size: 12px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-        -webkit-transition: all ease-in 0.5s;
         transition: all ease-in 0.5s;
 }
 
@@ -123,9 +121,8 @@ body {
 	color: white;
 }
 
- .slide.ng-enter, .slide.ng-leave {    
-     -webkit-transition: all 0.8s ease-in-out;
-     transition: all 0.8s ease-in-out;  
+ .slide.ng-enter, .slide.ng-leave {
+     transition: all 0.3s ease-in-out;  
  }
  .slide.ng-enter,
  .slide.ng-leave.ng-leave-active {
@@ -157,4 +154,5 @@ body {
  #nav_cont {
      position: relative;
      height: 15%;
- }
+     padding: 0 5px;
+}
