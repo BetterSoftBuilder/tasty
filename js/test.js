@@ -1,27 +1,28 @@
 var tastyApp = angular.module('tastyApp', ['ngMaterial','ngAnimate']);
 
-tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', '$animate', function($scope, $interval, $http, $animate) {
-
-        $scope.mode = 'query';
-        $scope.determinateValue = 30;
-        $interval(function() {
-          $scope.determinateValue += 1;
-          if ($scope.determinateValue > 100) {
-            $scope.determinateValue = 30;
-          }
-        }, 100, 0, true);
+tastyApp.controller('TastyBox', ['$scope', '$http', '$animate', function($scope, $http, $animate) {
 
         $scope.tastyBase = false;
-
         $scope.imgHeight = parseInt($("#img_cont").css("height"));
         $scope.textHeight = parseInt($(".main_text").css("height")) + $scope.imgHeight;
         $scope.textDisplay = false;
+        $scope.loadDisplay = false;
         $scope.index = 0;
 
+        $scope.cover = {
+            tasty_boxUrl: '../img/comp_plate_graybasic.png',
+            prevUrl     : '../img/button_bg_white_left2.png',
+            nextUrl     : '../img/button_bg_white_right2.png',
+            findUrl     : '../img/button_bg_white_right3.png',
+            prevHovUrl  : '../img/button_bg_orange_left2.png',
+            nextHovUrl  : '../img/button_bg_orange_right2.png',
+            findHovUrl  : '../img/button_bg_orange_right3.png'
+        };
+
         $scope.$watch('textDisplay', function (flag) {
-            //$scope.textHeight = flag ? ($scope.textHeight += $scope.imgHeight) : ($scope.textHeight -= $scope.imgHeight);
-            flag ? $animate.animate($(".main_text"), {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight += $scope.imgHeight)+'px'}) :
-                   $animate.animate($(".main_text"), {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight -= $scope.imgHeight)+'px'});
+            var mainText = $(".main_text");
+            flag ? $animate.animate(mainText, {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight += $scope.imgHeight)+'px'}) :
+                   $animate.animate(mainText, {'height': $scope.textHeight+'px'}, {'height': ($scope.textHeight -= $scope.imgHeight)+'px'});
         });
 
         $scope.$watch('index',function (newIndex) {
@@ -29,24 +30,15 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', '$animate', fun
             if (newIndex < 0) $scope.index = $scope.tastyBase.length - 1;
         });
 
-        $scope.cover = {
-                            tasty_boxUrl: '../img/comp_plate_graybasic.png',
-                            prevUrl     : '../img/button_bg_white_left2.png',
-                            nextUrl     : '../img/button_bg_white_right2.png',
-                            findUrl     : '../img/button_bg_white_right3.png',
-                            prevHovUrl  : '../img/button_bg_orange_left2.png',
-                            nextHovUrl  : '../img/button_bg_orange_right2.png',
-                            findHovUrl  : '../img/button_bg_orange_right3.png'
-                        };
-
         $scope.getData = function() {
-            //$scope._loadAnimation($("#img_cont"));
+            $scope.loadAnimation($("#img_cont"));
             if (!$scope.tastyBase) {
                 $http.get('json/info_box.json').success(
                     function (json) {
+                        $scope.loadDisplay = false;
                         $scope.tastyBase = json;
                     }).error(function () {
-                        //TODO
+                        console.log('error');
                     });
             } else {
                 return $scope.tastyBase;
@@ -59,10 +51,12 @@ tastyApp.controller('TastyBox', ['$scope', '$interval', '$http', '$animate', fun
             }
         };
 
-        $scope._loadAnimation = function(container) {
+        $scope.loadAnimation = function(container) {
+            var imgLoad = $(".md-hue-2");
             var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
             var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
             imgLoad.offset({top: centerY, left: centerX});
+            $scope.loadDisplay = true;
         };
 
         $scope.init = function() {

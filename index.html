@@ -23,9 +23,9 @@
                     <div id="load_cont">
                         <div id="img_cont" ng-hide="textDisplay">                                
                             <img class="slide" ng-repeat='slide in tastyBase' ng-src="img/{{slide.img}}" ng-if='index==$index' alt=''>
-                            <!-- <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>-->
+                            <md-progress-circular  ng-show="loadDisplay" class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
 			</div>
-			<div id="text_cont">	
+			<div id="text_cont">
                             <h1 class="title" ng-repeat='slide in tastyBase' ng-if='index==$index'>{{slide.title}}</h1>
                             <p class="main_text" style="height:{{textHeight}}px;">
                                 <span class="text" ng-repeat='slide in tastyBase' ng-if='index==$index'>{{slide.description}}</span><br><br>
