@@ -9,7 +9,7 @@ tastyApp.controller('TastyBox', ['$scope', '$http', '$animate', function($scope,
         $scope.loadDisplay = false;
         $scope.index = 0;
 
-        $scope.cover = {
+        var cover = {
             tasty_boxUrl: '../img/comp_plate_graybasic.png',
             prevUrl     : '../img/button_bg_white_left2.png',
             nextUrl     : '../img/button_bg_white_right2.png',
@@ -30,8 +30,8 @@ tastyApp.controller('TastyBox', ['$scope', '$http', '$animate', function($scope,
             if (newIndex < 0) $scope.index = $scope.tastyBase.length - 1;
         });
 
-        $scope.getData = function() {
-            $scope.loadAnimation($("#img_cont"));
+        var getData = function() {
+            loadAnimation($("#img_cont"));
             if (!$scope.tastyBase) {
                 $http.get('json/info_box.json').success(
                     function (json) {
@@ -45,13 +45,13 @@ tastyApp.controller('TastyBox', ['$scope', '$http', '$animate', function($scope,
             }
         };
 
-        $scope.coverInit = function() {
-            for (var backUrl in $scope.cover) {
-                $scope.cover[backUrl] && $('#' + backUrl.toString().substr(backUrl.toString().length - 3, 3)).css({'background': "url(" + $scope.cover[backUrl] + ") no-repeat"});
+        var coverInit = function() {
+            for (var backUrl in cover) {
+                cover[backUrl] && $('#' + backUrl.toString().substr(backUrl.toString().length - 3, 3)).css({'background': "url(" + cover[backUrl] + ") no-repeat"});
             }
         };
 
-        $scope.loadAnimation = function(container) {
+        var loadAnimation = function(container) {
             var imgLoad = $(".md-hue-2");
             var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
             var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
@@ -60,8 +60,8 @@ tastyApp.controller('TastyBox', ['$scope', '$http', '$animate', function($scope,
         };
 
         $scope.init = function() {
-            $scope.coverInit();
-            $scope.getData();
+            coverInit();
+            getData();
         };
 
 }]);
