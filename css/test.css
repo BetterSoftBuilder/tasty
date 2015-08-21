@@ -8,7 +8,7 @@ body {
 	width: 323px;
 	height: 330px;
 	padding: 5px 0;
-	background: url("../img/comp_plate_graybasic.png") no-repeat;
+	
 }
 
 .width {
@@ -83,32 +83,32 @@ body {
 }
 
 #prev {
-	background: url("../img/button_bg_white_left2.png") no-repeat;
+	
 	padding: 5px 15px 13px 30px;
 }
 
 #next {
-	background: url("../img/button_bg_white_right2.png") no-repeat;
+	
 	padding: 5px 30px 8px 13px;
 }
 
 #find {
-	background: url("../img/button_bg_white_right3.png") no-repeat;
+	
 	padding: 5px 30px 8px 16px;
 	color: #F58220;
 }
 
 #prev:hover {
-	background: url("../img/button_bg_orange_left2.png") no-repeat;
+	
 	color: white;
 }
 
 #next:hover  {
-	background: url("../img/button_bg_orange_right2.png") no-repeat;
+	
 	color: white;
 }
 
 #find:hover  {
-	background: url("../img/button_bg_orange_right3.png") no-repeat;
+	
 	color: white;
 }
