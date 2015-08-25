@@ -1,6 +1,6 @@
 function Tasty(options) {
 
-    var i = 0;
+    var index = 0;
     var tastyBase = false;
 
     $.fn.image = function(src, f) {
@@ -14,15 +14,13 @@ function Tasty(options) {
     };
 
     function getData() {
-        loadAnimation($("#img_cont"));
-        coverInit();
         if (!tastyBase) {
             $.when($.getJSON('../json/info_box.json')).then(
-                    function (json) {
-                        tastyBase = json;
-                        $("#imgLoad").hide();
-                        loadContent();
-                    }, function () {
+                function (json) {
+                    tastyBase = json;
+                    $("#imgLoad").hide();
+                    loadContent();
+                }, function () {
                 //TODO
             });
         } else {
@@ -50,39 +48,34 @@ function Tasty(options) {
     function loadContent() {
         loadAnimation($("#img_cont"));
         $('#main_img').fadeOut(250, function () {
-            $(this).attr('src', 'img/' + tastyBase[i].img).fadeIn(500);
+            $(this).attr('src', 'img/' + tastyBase[index].img).fadeIn(500);
             $("#imgLoad").hide();
         });
-        $('#title').html(tastyBase[i].title);
-        $('#text').html(tastyBase[i].description);
-        $('#details').html(tastyBase[i].note);
-        $('#find').attr('href', tastyBase[i].productUrl);
+        $('#title').html(tastyBase[index].title);
+        $('#text').html(tastyBase[index].description);
+        $('#details').html(tastyBase[index].note);
+        $('#find').attr('href', tastyBase[index].productUrl);
     }
 
     function events() {
         var h = parseInt($("#main_text").css("height"));
-        var tasty_box = $("#tasty_box");
-        tasty_box.on("click", "#prev", function (e) {
+        $("#tasty_box").on('click', function(e){
             e.preventDefault();
-            navigation(0);
-        });
-        tasty_box.on("click", "#next", function (e) {
-            e.preventDefault();
-            navigation(1);
-        });
-        tasty_box.on("click", "#show", function (e) {
-            e.preventDefault();
-            showDetails(h);
+            switch (e.target.id) {
+                case "prev": navigation(0); break;
+                case "next": navigation(1); break;
+                case "show": showDetails(h); break;
+            }
         });
     }
 
     function navigation(nav) {
         if (nav) {
-            i++;
-            if (i >= tastyBase.length) i = 0;
+            index++;
+            if (index >= tastyBase.length) index = 0;
         } else {
-            i--;
-            if (i < 0) i = tastyBase.length - 1;
+            index--;
+            if (index < 0) index = tastyBase.length - 1;
         }
         loadContent();
         //_loadAnimation($("#img_cont"));
@@ -102,9 +95,15 @@ function Tasty(options) {
         }
     }
 
+    (function init() {
+        coverInit();
+        loadAnimation($("#img_cont"));
+        getData();
+        events();
+    }());
+
     this.coverInit = coverInit;
     this.getData = getData;
-    this.events = events;
 };
 
 var tasty = new Tasty({
@@ -118,15 +117,3 @@ var tasty = new Tasty({
                 findHovUrl  : '../img/button_bg_orange_right3.png'
             }
 });
-
-tasty.coverInit({
-                tasty_boxUrl: '../img/comp_plate_graybasic.png',
-                prevUrl     : '../img/button_bg_white_right2.png',
-                nextUrl     : '../img/button_bg_white_left2.png',
-                findUrl     : '../img/button_bg_white_right3.png',
-                prevHovUrl  : '../img/button_bg_orange_left2.png',
-                nextHovUrl  : '../img/button_bg_orange_right2.png',
-                findHovUrl  : '../img/button_bg_orange_right3.png'
-            });
-tasty.getData();
-tasty.events();
