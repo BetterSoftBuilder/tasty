@@ -14,6 +14,7 @@ function Tasty(options) {
     };
 
     function getData() {
+        loadAnimation($("#img_cont"));
         if (!tastyBase) {
             $.when($.getJSON('../json/info_box.json')).then(
                 function (json) {
@@ -97,13 +98,13 @@ function Tasty(options) {
 
     (function init() {
         coverInit();
-        loadAnimation($("#img_cont"));
         getData();
         events();
     }());
 
     this.coverInit = coverInit;
     this.getData = getData;
+    this.navigation = navigation;
 };
 
 var tasty = new Tasty({
@@ -116,4 +117,8 @@ var tasty = new Tasty({
                 nextHovUrl  : '../img/button_bg_orange_right2.png',
                 findHovUrl  : '../img/button_bg_orange_right3.png'
             }
+});
+
+$("#tasty_box").on('click', function() {
+    tasty.navigation(1);
 });
