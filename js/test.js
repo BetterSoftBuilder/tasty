@@ -119,7 +119,3 @@ var tasty = new Tasty({
                 findHovUrl  : '../img/button_bg_orange_right3.png'
             }
 });
-
-$("#tasty_box").on('click', function() {
-    //tasty.navigation(1);
-});
