@@ -23,7 +23,7 @@ function Tasty(options) {
                     $("#imgLoad").hide();
                     loadContent();
                 }, function () {
-                //TODO
+                    console.log('¯\\_(ツ)_/¯');
             });
         } else {
             return _this.tastyBase;
