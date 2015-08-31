@@ -1,7 +1,8 @@
 function Tasty(options) {
 
-    var index = 0;
-    var tastyBase = false;
+    this.index = 0;
+    this.tastyBase = false;
+    var _this = this;
 
     $.fn.image = function(src, f) {
         return this.each(function() {
@@ -15,17 +16,17 @@ function Tasty(options) {
 
     function getData() {
         loadAnimation($("#img_cont"));
-        if (!tastyBase) {
+        if (!_this.tastyBase) {
             $.when($.getJSON('../json/info_box.json')).then(
                 function (json) {
-                    tastyBase = json;
+                    _this.tastyBase = json;
                     $("#imgLoad").hide();
                     loadContent();
                 }, function () {
                 //TODO
             });
         } else {
-            return tastyBase;
+            return _this.tastyBase;
         }
     }
 
@@ -49,13 +50,13 @@ function Tasty(options) {
     function loadContent() {
         loadAnimation($("#img_cont"));
         $('#main_img').fadeOut(250, function () {
-            $(this).attr('src', 'img/' + tastyBase[index].img).fadeIn(500);
+            $(this).attr('src', 'img/' + _this.tastyBase[_this.index].img).fadeIn(500);
             $("#imgLoad").hide();
         });
-        $('#title').html(tastyBase[index].title);
-        $('#text').html(tastyBase[index].description);
-        $('#details').html(tastyBase[index].note);
-        $('#find').attr('href', tastyBase[index].productUrl);
+        $('#title').html(_this.tastyBase[_this.index].title);
+        $('#text').html(_this.tastyBase[_this.index].description);
+        $('#details').html(_this.tastyBase[_this.index].note);
+        $('#find').attr('href', _this.tastyBase[_this.index].productUrl);
     }
 
     function events() {
@@ -72,11 +73,11 @@ function Tasty(options) {
 
     function navigation(nav) {
         if (nav) {
-            index++;
-            if (index >= tastyBase.length) index = 0;
+            _this.index++;
+            if (_this.index >= _this.tastyBase.length) _this.index = 0;
         } else {
-            index--;
-            if (index < 0) index = tastyBase.length - 1;
+            _this.index--;
+            if (_this.index < 0) _this.index = _this.tastyBase.length - 1;
         }
         loadContent();
         //_loadAnimation($("#img_cont"));
@@ -120,5 +121,5 @@ var tasty = new Tasty({
 });
 
 $("#tasty_box").on('click', function() {
-    tasty.navigation(1);
+    //tasty.navigation(1);
 });
