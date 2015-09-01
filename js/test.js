@@ -2,6 +2,9 @@ function Tasty(options) {
 
     this.index = 0;
     this.tastyBase = false;
+    this.detailsFlag = true;
+    this.imgHeight = parseInt($("#img_cont").css("height"));
+    this.textHeight = parseInt($("#main_text").css("height")) + this.imgHeight;
     var _this = this;
 
     $.fn.image = function(src, f) {
@@ -80,20 +83,16 @@ function Tasty(options) {
             if (_this.index < 0) _this.index = _this.tastyBase.length - 1;
         }
         loadContent();
-        //_loadAnimation($("#img_cont"));
     }
 
     function showDetails(h) {
-        var text = $("#main_text");
-        var text_height = $("#main_text").css("height");
-        if (text_height == h + 'px' || text_height == h + 200 + 'px') {
-            $("#img_cont").stop().animate({opacity: "toggle", height: 'toggle'}, 500);
-        }
-        if (text_height == h + 'px') {
-            text.stop().animate({height: '+=200px'}, 500);
-        }
-        if (text_height == h + 200 + 'px') {
-            text.stop().animate({height: h}, 500);
+        var mainText = $("#main_text");
+        var imgCont = $("#img_cont");
+        _this.detailsFlag = !_this.detailsFlag;
+        if(_this.detailsFlag) {
+            imgCont.show("slow"); mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight += _this.imgHeight)+'px'});
+        } else {
+            imgCont.hide("slow"); mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight -= _this.imgHeight)+'px'});
         }
     }
 
