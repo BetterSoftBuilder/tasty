@@ -90,9 +90,11 @@ function Tasty(options) {
         var imgCont = $("#img_cont");
         _this.detailsFlag = !_this.detailsFlag;
         if(_this.detailsFlag) {
-            imgCont.show("slow"); mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight += _this.imgHeight)+'px'});
+            imgCont.slideDown().animate({ opacity: 1 },{ queue: false});
+            mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight += _this.imgHeight)+'px'});
         } else {
-            imgCont.hide("slow"); mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight -= _this.imgHeight)+'px'});
+            imgCont.slideUp().animate({ opacity: 0 },{ queue: false});
+            mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight -= _this.imgHeight)+'px'});
         }
     }
 
