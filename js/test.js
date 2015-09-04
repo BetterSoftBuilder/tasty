@@ -18,10 +18,11 @@ function Tasty(options) {
         });
     };
 
-    function getData() {
+    function getData(path) {
+        path = path || options.path;
         loadAnimation($("#img_cont"));
         if (!_this.tastyBase) {
-            $.when($.getJSON('../json/info_box.json')).then(
+            $.when($.getJSON(path)).then(
                 function (json) {
                     _this.tastyBase = json;
                     $("#imgLoad").hide();
@@ -87,8 +88,8 @@ function Tasty(options) {
         loadContent();
     }
 
-    function startAutoscroll() {
-        var interval = interval || options.interval;
+    function startAutoscroll(interval) {
+        interval = interval || options.interval;
         _this.scrollTimer = setInterval(function() { navigation(1); }, interval);
     }
 
@@ -109,6 +110,10 @@ function Tasty(options) {
         }
     }
 
+    function genID() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    }
+
     (function init() {
         coverInit();
         getData();
@@ -123,6 +128,7 @@ function Tasty(options) {
 };
 
 var tasty = new Tasty({
+    path: '../json/info_box.json',
     interval: 5000,
     cover:  {
                 tasty_boxUrl: '../img/comp_plate_graybasic.png',
