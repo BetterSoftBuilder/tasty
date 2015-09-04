@@ -5,6 +5,7 @@ function Tasty(options) {
     this.detailsFlag = true;
     this.imgHeight = parseInt($("#img_cont").css("height"));
     this.textHeight = parseInt($("#main_text").css("height")) + this.imgHeight;
+    this.scrollTimer = 0;
     var _this = this;
 
     $.fn.image = function(src, f) {
@@ -25,6 +26,7 @@ function Tasty(options) {
                     _this.tastyBase = json;
                     $("#imgLoad").hide();
                     loadContent();
+                    startAutoscroll();
                 }, function () {
                     console.log('¯\\_(ツ)_/¯');
             });
@@ -63,13 +65,13 @@ function Tasty(options) {
     }
 
     function events() {
-        var h = parseInt($("#main_text").css("height"));
         $("#tasty_box").on('click', function(e){
             e.preventDefault();
+            stopAutoscroll();
             switch (e.target.id) {
                 case "prev": navigation(0); break;
                 case "next": navigation(1); break;
-                case "show": showDetails(h); break;
+                case "show": showDetails(); break;
             }
         });
     }
@@ -85,7 +87,16 @@ function Tasty(options) {
         loadContent();
     }
 
-    function showDetails(h) {
+    function startAutoscroll() {
+        var interval = interval || options.interval;
+        _this.scrollTimer = setInterval(function() { navigation(1); }, interval);
+    }
+
+    function stopAutoscroll() {
+        clearInterval(_this.scrollTimer);
+    }
+
+    function showDetails() {
         var mainText = $("#main_text");
         var imgCont = $("#img_cont");
         _this.detailsFlag = !_this.detailsFlag;
@@ -107,10 +118,13 @@ function Tasty(options) {
     this.coverInit = coverInit;
     this.getData = getData;
     this.navigation = navigation;
+    this.startAutoscroll = startAutoscroll;
+    this.stopAutoscroll = stopAutoscroll;
 };
 
 var tasty = new Tasty({
-   cover:  {
+    interval: 5000,
+    cover:  {
                 tasty_boxUrl: '../img/comp_plate_graybasic.png',
                 prevUrl     : '../img/button_bg_white_left2.png',
                 nextUrl     : '../img/button_bg_white_right2.png',
