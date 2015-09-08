@@ -3,8 +3,6 @@ function Tasty(options) {
     this.index = 0;
     this.tastyBase = false;
     this.detailsFlag = true;
-    this.imgHeight = parseInt($("#img_cont").css("height"));
-    this.textHeight = parseInt($("#main_text").css("height")) + this.imgHeight;
     this.scrollTimer = 0;
     var _this = this;
 
@@ -34,6 +32,15 @@ function Tasty(options) {
         } else {
             return _this.tastyBase;
         }
+    }
+
+    function render(elem) {
+        $.when($.get('../js/other/render.html')).then(function (template) {
+            $('body').append(template);
+            coverInit();
+            getData();
+            events();
+        });
     }
 
     function coverInit(cover) {
@@ -66,6 +73,8 @@ function Tasty(options) {
     }
 
     function events() {
+        _this.imgHeight = parseInt($("#img_cont").css("height"));
+        _this.textHeight = parseInt($("#main_text").css("height")) + _this.imgHeight;
         $("#tasty_box").on('click', function(e){
             e.preventDefault();
             stopAutoscroll();
@@ -115,9 +124,7 @@ function Tasty(options) {
     }
 
     (function init() {
-        coverInit();
-        getData();
-        events();
+        render($('body'));
     }());
 
     this.coverInit = coverInit;
@@ -128,7 +135,7 @@ function Tasty(options) {
 };
 
 var tasty = new Tasty({
-    path: '../json/info_box.json',
+    path: '../js/other/info_box.json',
     interval: 5000,
     cover:  {
                 tasty_boxUrl: '../img/comp_plate_graybasic.png',
