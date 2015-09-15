@@ -18,12 +18,12 @@ function Tasty(options) {
 
     function getData(path) {
         path = path || options.path;
-        loadAnimation($("#img_cont"));
+        loadAnimation($('body').find(_this.mainId).find("#img_cont"));
         if (!_this.tastyBase) {
             $.when($.getJSON(path)).then(
                 function (json) {
                     _this.tastyBase = json;
-                    $("#imgLoad").hide();
+                    $(_this.mainId).find("#imgLoad").hide();
                     loadContent();
                     startAutoscroll();
                 }, function () {
@@ -34,9 +34,15 @@ function Tasty(options) {
         }
     }
 
+    function genID() {
+        return 'tasty_' + Math.random().toString(36).substr(2, 9);
+    }
+
     function render(elem) {
-        $.when($.get('../js/other/render.html')).then(function (template) {
+        $.when($.get('../js/other/render.tmp')).then(function (template) {
             $('body').append(template);
+            _this.mainId = '#' + genID();
+            $('#tasty_box').attr("id", _this.mainId.substr(1,_this.mainId.length));
             coverInit();
             getData();
             events();
@@ -46,13 +52,13 @@ function Tasty(options) {
     function coverInit(cover) {
         cover = cover || options.cover;
         for (var backUrl in cover) {
-            cover[backUrl] && $('#' + backUrl.toString().substr(0, backUrl.toString().length - 3)).css({'background': "url(" + cover[backUrl] + ") no-repeat"});
+            cover[backUrl] && $(_this.mainId).find('#' + backUrl.toString().substr(0, backUrl.toString().length - 3)).css({'background': "url(" + cover[backUrl] + ") no-repeat"});
         }
     }
 
     function loadAnimation(container) {
         container.image("img/loader.gif",function(){
-            var imgLoad = $("#imgLoad");
+            var imgLoad = $(_this.mainId).find("#imgLoad");
             imgLoad.show();
             var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
             var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
@@ -61,21 +67,21 @@ function Tasty(options) {
     }
 
     function loadContent() {
-        loadAnimation($("#img_cont"));
-        $('#main_img').fadeOut(250, function () {
+        loadAnimation($(_this.mainId).find("#img_cont"));
+        $(_this.mainId).find('#main_img').fadeOut(250, function () {
             $(this).attr('src', 'img/' + _this.tastyBase[_this.index].img).fadeIn(500);
-            $("#imgLoad").hide();
+            $(_this.mainId).find("#imgLoad").hide();
         });
-        $('#title').html(_this.tastyBase[_this.index].title);
-        $('#text').html(_this.tastyBase[_this.index].description);
-        $('#details').html(_this.tastyBase[_this.index].note);
-        $('#find').attr('href', _this.tastyBase[_this.index].productUrl);
+        $(_this.mainId).find('#title').html(_this.tastyBase[_this.index].title);
+        $(_this.mainId).find('#text').html(_this.tastyBase[_this.index].description);
+        $(_this.mainId).find('#details').html(_this.tastyBase[_this.index].note);
+        $(_this.mainId).find('#find').attr('href', _this.tastyBase[_this.index].productUrl);
     }
 
     function events() {
-        _this.imgHeight = parseInt($("#img_cont").css("height"));
-        _this.textHeight = parseInt($("#main_text").css("height")) + _this.imgHeight;
-        $("#tasty_box").on('click', function(e){
+        _this.imgHeight = parseInt($(_this.mainId).find("#img_cont").css("height"));
+        _this.textHeight = parseInt($(_this.mainId).find("#main_text").css("height")) + _this.imgHeight;
+        $(_this.mainId).on('click', function(e){
             e.preventDefault();
             stopAutoscroll();
             switch (e.target.id) {
@@ -107,8 +113,8 @@ function Tasty(options) {
     }
 
     function showDetails() {
-        var mainText = $("#main_text");
-        var imgCont = $("#img_cont");
+        var mainText = $(_this.mainId).find("#main_text");
+        var imgCont = $(_this.mainId).find("#img_cont");
         _this.detailsFlag = !_this.detailsFlag;
         if(_this.detailsFlag) {
             imgCont.slideDown().animate({ opacity: 1 },{ queue: false});
@@ -117,10 +123,6 @@ function Tasty(options) {
             imgCont.slideUp().animate({ opacity: 0 },{ queue: false});
             mainText.animate({'height': _this.textHeight+'px'}, {'height': (_this.textHeight -= _this.imgHeight)+'px'});
         }
-    }
-
-    function genID() {
-        return '_' + Math.random().toString(36).substr(2, 9);
     }
 
     (function init() {
@@ -138,7 +140,7 @@ var tasty = new Tasty({
     path: '../js/other/info_box.json',
     interval: 5000,
     cover:  {
-                tasty_boxUrl: '../img/comp_plate_graybasic.png',
+                tasty_wrapUrl: '../img/comp_plate_graybasic.png',
                 prevUrl     : '../img/button_bg_white_left2.png',
                 nextUrl     : '../img/button_bg_white_right2.png',
                 findUrl     : '../img/button_bg_white_right3.png',

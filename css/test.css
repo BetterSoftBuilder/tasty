@@ -4,11 +4,10 @@ body {
 	font-family: Arial;
 }
 
-#tasty_box {
+#tasty_wrap {
 	width: 323px;
 	height: 330px;
-	padding: 5px 0;
-	
+	padding: 5px 0;	
 }
 
 .width {
@@ -82,33 +81,27 @@ body {
 	font-weight: bold;
 }
 
-#prev {
-	
+#prev {	
 	padding: 5px 15px 13px 30px;
 }
 
-#next {
-	
+#next {	
 	padding: 5px 30px 8px 13px;
 }
 
-#find {
-	
+#find {	
 	padding: 5px 30px 8px 16px;
 	color: #F58220;
 }
 
-#prev:hover {
-	
+#prev:hover {	
 	color: white;
 }
 
-#next:hover  {
-	
+#next:hover  {	
 	color: white;
 }
 
-#find:hover  {
-	
+#find:hover  {	
 	color: white;
 }
