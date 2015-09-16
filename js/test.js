@@ -18,7 +18,7 @@ function Tasty(options) {
 
     function getData(path) {
         path = path || options.path;
-        loadAnimation($('body').find(_this.mainId).find("#img_cont"));
+        loadAnimation($(_this.mainId).find("#img_cont"));
         if (!_this.tastyBase) {
             $.when($.getJSON(path)).then(
                 function (json) {
@@ -40,7 +40,7 @@ function Tasty(options) {
 
     function render(elem) {
         $.when($.get('../js/other/render.tmp')).then(function (template) {
-            $('body').append(template);
+            $(elem).append(template);
             _this.mainId = '#' + genID();
             $('#tasty_box').attr("id", _this.mainId.substr(1,_this.mainId.length));
             coverInit();
@@ -126,7 +126,7 @@ function Tasty(options) {
     }
 
     (function init() {
-        render($('body'));
+        render('body');
     }());
 
     this.coverInit = coverInit;
