@@ -90,23 +90,24 @@ function Tasty(options) {
                 case "next": next(); break;
                 case "show": showDetails(); break;
             }
-            loadContent();
         });
     }
 
     function prev() {
         _this.index--;
         if (_this.index < 0) _this.index = _this.tastyBase.length - 1;
+        loadContent();
     }
 
     function next() {
         _this.index++;
         if (_this.index >= _this.tastyBase.length) _this.index = 0;
+        loadContent();
     }
 
     function startAutoscroll(interval) {
         interval = interval || options.interval;
-        _this.scrollTimer = setInterval(function() { next(); loadContent();}, interval);
+        _this.scrollTimer = setInterval(function() { next();}, interval);
     }
 
     function stopAutoscroll() {
@@ -127,7 +128,7 @@ function Tasty(options) {
     }
 
     (function init() {
-        render('body');
+        render(options.location);
     }());
 
     this.coverInit = coverInit;
@@ -140,6 +141,7 @@ function Tasty(options) {
 
 var tasty = new Tasty({
     path: '../js/other/info_box.json',
+    location: 'body',
     interval: 5000,
     cover:  {
                 tasty_wrapUrl: '../img/comp_plate_graybasic.png',
