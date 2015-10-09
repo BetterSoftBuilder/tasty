@@ -86,27 +86,27 @@ function Tasty(options) {
             e.preventDefault();
             stopAutoscroll();
             switch (e.target.id) {
-                case "prev": navigation(0); break;
-                case "next": navigation(1); break;
+                case "prev": prev(); break;
+                case "next": next(); break;
                 case "show": showDetails(); break;
             }
+            loadContent();
         });
     }
 
-    function navigation(nav) {
-        if (nav) {
-            _this.index++;
-            if (_this.index >= _this.tastyBase.length) _this.index = 0;
-        } else {
-            _this.index--;
-            if (_this.index < 0) _this.index = _this.tastyBase.length - 1;
-        }
-        loadContent();
+    function prev() {
+        _this.index--;
+        if (_this.index < 0) _this.index = _this.tastyBase.length - 1;
+    }
+
+    function next() {
+        _this.index++;
+        if (_this.index >= _this.tastyBase.length) _this.index = 0;
     }
 
     function startAutoscroll(interval) {
         interval = interval || options.interval;
-        _this.scrollTimer = setInterval(function() { navigation(1); }, interval);
+        _this.scrollTimer = setInterval(function() { next(); loadContent();}, interval);
     }
 
     function stopAutoscroll() {
@@ -132,7 +132,8 @@ function Tasty(options) {
 
     this.coverInit = coverInit;
     this.getData = getData;
-    this.navigation = navigation;
+    this.prev = prev;
+    this.next = next;
     this.startAutoscroll = startAutoscroll;
     this.stopAutoscroll = stopAutoscroll;
 };
