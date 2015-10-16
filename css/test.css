@@ -6,13 +6,14 @@ body {
 
 #tasty_wrap {
 	width: 323px;
-	height: 330px;
-	padding: 5px 0;	
+	height: 337px;
+	padding: 5px 0;
 }
 
 .width {
 	width: 315px;
 	margin: 0 auto;
+        height: 100%;
 }
 
 #buttons {
@@ -27,8 +28,9 @@ body {
 }
 
 #img_cont {
-        width: 312px;
-        height: 200px;
+        width: 98%;
+        height: 60%;
+        margin: auto;
 }
 
 #imgLoad {
@@ -94,14 +96,6 @@ body {
 	color: #F58220;
 }
 
-#prev:hover {	
-	color: white;
-}
-
-#next:hover  {	
-	color: white;
-}
-
-#find:hover  {	
-	color: white;
+#prev:hover, #next:hover {	
+        color: #F58220;
 }
