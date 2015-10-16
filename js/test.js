@@ -6,24 +6,12 @@ function Tasty(options) {
     this.scrollTimer = 0;
     var _this = this;
 
-    $.fn.image = function(src, f) {
-        return this.each(function() {
-          var i = new Image();
-          i.src = src;
-          i.onload = f;
-          i.id = 'imgLoad';
-          this.appendChild(i);
-        });
-    };
-
     function getData(path) {
         path = path || options.path;
-        loadAnimation(_this.mainId.find("#img_cont"));
         if (!_this.tastyBase) {
             $.when($.getJSON(path)).then(
                 function (json) {
                     _this.tastyBase = json;
-                    _this.mainId.find("#imgLoad").hide();
                     loadContent();
                     startAutoscroll();
                 }, function () {
@@ -57,21 +45,9 @@ function Tasty(options) {
         }
     }
 
-    function loadAnimation(container) {
-        container.image("img/loader.gif",function(){
-            var imgLoad = _this.mainId.find("#imgLoad");
-            imgLoad.show();
-            var centerY = container.scrollTop() + (container.height() - imgLoad.height()) / 2;
-            var centerX = container.scrollLeft() + (container.width() - imgLoad.width()) / 2;
-            imgLoad.offset({top: centerY, left: centerX});
-        });
-    }
-
     function loadContent() {
-        loadAnimation(_this.mainId.find("#img_cont"));
-        _this.mainId.find('#main_img').fadeOut(250, function () {
-            $(this).attr('src', 'img/' + _this.tastyBase[_this.index].img).fadeIn(500);
-            _this.mainId.find("#imgLoad").hide();
+        _this.mainId.find('#img_cont').fadeOut(250, function () {
+            $(this).css({'background-image': 'url(img/' + _this.tastyBase[_this.index].img + ')','background-repeat': 'no-repeat'}).fadeIn(500);
         });
         _this.mainId.find('#title').html(_this.tastyBase[_this.index].title);
         _this.mainId.find('#text').html(_this.tastyBase[_this.index].description);
@@ -145,11 +121,11 @@ var tasty = new Tasty({
     interval: 5000,
     cover:  {
                 tasty_wrapUrl: '../img/comp_plate_graybasic.png',
-                prevUrl     : '../img/button_bg_white_left2.png',
-                nextUrl     : '../img/button_bg_white_right2.png',
-                findUrl     : '../img/button_bg_white_right3.png',
-                prevHovUrl  : '../img/button_bg_orange_left2.png',
-                nextHovUrl  : '../img/button_bg_orange_right2.png',
-                findHovUrl  : '../img/button_bg_orange_right3.png'
+                prevUrl      : '../img/button_bg_white_left2.png',
+                nextUrl      : '../img/button_bg_white_right2.png',
+                findUrl      : '../img/button_bg_white_right3.png',
+                prevHovUrl   : '../img/button_bg_orange_left2.png',
+                nextHovUrl   : '../img/button_bg_orange_right2.png',
+                findHovUrl   : '../img/button_bg_orange_right3.png'
             }
 });
