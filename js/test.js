@@ -47,7 +47,7 @@ function Tasty(options) {
 
     function loadContent() {
         _this.mainId.find('#img_cont').fadeOut(250, function () {
-            $(this).css({'background' : 'url(img/' + _this.tastyBase[_this.index].img + ') no-repeat'}).fadeIn(500);
+            $(this).css({'background' : 'url(img/' + _this.tastyBase[_this.index].img + ') 50% 50% / contain no-repeat'}).fadeIn(500);
         });
         _this.mainId.find('#title').html(_this.tastyBase[_this.index].title);
         _this.mainId.find('#text').html(_this.tastyBase[_this.index].description);
