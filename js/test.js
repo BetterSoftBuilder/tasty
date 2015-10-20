@@ -3,6 +3,7 @@ function Tasty(options) {
     this.index = 0;
     this.tastyBase = false;
     this.detailsFlag = true;
+    this.animationFlag = false;
     this.scrollTimer = 0;
     var _this = this;
 
@@ -46,8 +47,11 @@ function Tasty(options) {
     }
 
     function loadContent() {
-        _this.mainId.find('.img_cont').fadeOut(250, function () {
-            $(this).css({'background' : 'url(img/' + _this.tastyBase[_this.index].img + ') 50% 50% / contain no-repeat'}).fadeIn(500);
+        _this.animationFlag = true;
+        _this.mainId.find('.img_cont').animate({ opacity: 0 }, 250 ,function () {
+            $(this).css({'background' : 'url(img/' + _this.tastyBase[_this.index].img + ') 50% 50% / contain no-repeat'}).animate({ opacity: 1 }, 500 , function () {
+                _this.animationFlag = false;
+            });
         });
         _this.mainId.find('.title').html(_this.tastyBase[_this.index].title);
         _this.mainId.find('.text').html(_this.tastyBase[_this.index].description);
@@ -60,11 +64,13 @@ function Tasty(options) {
         _this.textHeight = parseInt(_this.mainId.find(".main_text").css("height")) + _this.imgHeight;
         _this.mainId.on('click', function(e){
             e.preventDefault();
-            stopAutoscroll();
-            switch (e.target.className.split(/\s+/)[0]) {
-                case "prev": prev(); break;
-                case "next": next(); break;
-                case "show": showDetails(); break;
+            if (!_this.animationFlag) {
+                stopAutoscroll();
+                switch (e.target.className.split(/\s+/)[0]) {
+                    case "prev": prev(); break;
+                    case "next": next(); break;
+                    case "show": showDetails(); break;
+                }
             }
         });
     }
