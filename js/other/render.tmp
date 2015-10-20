@@ -1,16 +1,16 @@
 <div id="tasty_box">
-    <div id="tasty_wrap">
+    <div class="tasty_wrap">
         <div class="width">
-            <div id="img_cont"></div>
-            <div id="text_cont">	
-                <h1 id="title"></h1>
-                <p id="main_text"><span id="text"></span><br><br><span id="details"></span></p>
+            <div class="img_cont"></div>
+            <div class="text_cont">	
+                <h1 class="title"></h1>
+                <p class="main_text"><span class="text"></span><br><br><span class="details"></span></p>
             </div>
-            <a href="" id="show">show details</a>
-            <ul id="buttons">
-                <li><a href="" id="prev" class="bt">Prev</a></li>
-                <li><a href="" id="next" class="bt">Next</a></li>
-                <li><a href="" id="find" class="bt">Find</a></li>
+            <a href="" class="show">show details</a>
+            <ul class="buttons">
+                <li><a href="" class="prev bt">Prev</a></li>
+                <li><a href="" class="next bt">Next</a></li>
+                <li><a href="" class="find bt">Find</a></li>
             </ul>
         </div>
     </div>

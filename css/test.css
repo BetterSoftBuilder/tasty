@@ -4,7 +4,7 @@ body {
 	font-family: Arial;
 }
 
-#tasty_wrap {
+.tasty_wrap {
 	max-width: 323px;
 	min-width: 250px;
 	height: 337px;
@@ -17,11 +17,11 @@ body {
 	height: 100%;
 }
 
-#buttons {
+.buttons {
 	padding: 15px 0 0 0;
 }
 
-#title {
+.title {
 	font-size: 18px;
 	color: #F58220;
 	font-weight: bold;
@@ -30,23 +30,23 @@ body {
 	white-space: nowrap;
 }
 
-#img_cont {
+.img_cont {
         width: 98%;
         height: 60%;
         margin: auto;
 }
 
-#imgLoad {
+.imgLoad {
     position:absolute; 
     z-index:1000; 
     display:none;
 }
 
-#text_cont {
+.text_cont {
 	margin: 0 5px;
 }
 
-#main_text {
+.main_text {
 	padding: 3px 0 0 0;
 	height: 35px;
 	font-size: 12px;
@@ -55,12 +55,12 @@ body {
 }
 
 
-#buttons>li {
+.buttons>li {
 	float: left;
 	padding-right: 8px;
 }
 
-#buttons>li:nth-last-child(1) {
+.buttons>li:nth-last-child(1) {
 	float: right;
 }
 
@@ -73,11 +73,11 @@ body {
 	text-decoration: none;
 }
 
-#details {
+.details {
 	color: grey;
 }
 
-#show {
+.show {
 	color: #F58220;
 	padding: 0 0 0 5px;
 	position: relative;
@@ -86,19 +86,19 @@ body {
 	font-weight: bold;
 }
 
-#prev {	
+.prev {	
 	padding: 5px 15px 13px 30px;
 }
 
-#next {	
+.next {	
 	padding: 5px 30px 8px 13px;
 }
 
-#find {	
+.find {
 	padding: 5px 30px 8px 16px;
 	color: #F58220;
 }
 
-#prev:hover, #next:hover {	
+.prev:hover, .next:hover {	
         color: #F58220;
 }
