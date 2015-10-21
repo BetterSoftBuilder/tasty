@@ -41,7 +41,7 @@ function Tasty(options) {
     function coverInit(cover) {
         cover = cover || options.cover;
         for (var backUrl in cover) {
-            cover[backUrl] && _this.mainId.find('.' + backUrl.toString().substr(0, backUrl.toString().length - 3)).css({'background': "url(" + cover[backUrl] + ") no-repeat"});
+            cover[backUrl] && _this.mainId.find('.' + backUrl.toString().substr(0, backUrl.toString().length - 3)).css({'background': "url(" + cover[backUrl] + ") 100% 0% / auto no-repeat"});
         }
     }
 
